@@ -30,3 +30,14 @@
 - One user can own many vehicles(one to many)
 - one user i.e customer can book many trips(1-M)
 - one user i.e driver can complete many trips
+
+## Code 
+create extension if not exists "uuid-ossp";
+create table users(
+  id uuid primary key default uuid_generate_v4(),
+  name text not null,
+  email text not null unique,
+  password text not null, 
+  role text check (role in ('customer', 'owner', 'driver')) not null,
+  created_at timestamp default now()
+);
